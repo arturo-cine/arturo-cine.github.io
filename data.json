@@ -4,14 +4,21 @@
     "folder": "/images/thistime/",
     "url": "thistime",
     "cover": "thistime.webp",
+    "banner": "thistime.webp",
     "title": "This Time",
     "category": "film",
-    "year": "2024",
+    "year": "",
     "genre": "fiction short",
     "length": "25 mins",
     "tags": ["Concept Development", "Directing", "Writing"],
-    "description": "text",
-    "img": ["img1.jpg", "img2.jpg", "img3.jpg", "img4.jpg"],
+    "desc": "text",
+    "img": [
+      "thistime.webp",
+      "thistime_l.jpg",
+      "thistime.webp",
+      "thistime.webp"
+    ],
+    "columnnr": 2,
     "video": [
       "youtube",
       "https://www.youtube.com/embed/yNB84TY4Irs?si=La2tIW9E_A_VxNtG"
@@ -22,14 +29,16 @@
     "folder": "/images/",
     "url": "",
     "cover": "",
+    "banner": "",
     "title": "Title",
     "category": "film",
     "year": "",
     "genre": "",
     "length": "",
     "tags": [""],
-    "description": "",
+    "desc": "",
     "img": [""],
+    "columnnr": 2,
     "video": ["", ""]
   },
   {
@@ -37,14 +46,16 @@
     "folder": "/images/",
     "url": "",
     "cover": "",
+    "banner": "",
     "title": "Title",
     "category": "photo",
     "year": "",
     "genre": "",
     "length": "",
     "tags": [""],
-    "description": "",
+    "desc": "",
     "img": [""],
+    "columnnr": 2,
     "video": ["", ""]
   }
 ]

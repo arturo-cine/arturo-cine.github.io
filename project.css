@@ -1,0 +1,47 @@
+.proj-title {
+  background-color: black;
+  color: whitesmoke;
+  margin: 1.5rem;
+  font-weight: lighter;
+  font-size: 3.6rem;
+  justify-items: center;
+  text-align: center;
+}
+
+.desc {
+  color: whitesmoke;
+  margin-top: 5rem;
+  margin-left: 20rem;
+  margin-right: 20rem;
+  margin-bottom: 5rem;
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+.proj-header {
+  width: 100%;
+  height: 50vh;
+}
+
+.proj-header img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.proj-singletag {
+  color: white;
+  /* height: 30px; */
+}
+
+.proj-imgs {
+  display: grid;
+  width: 100%;
+  gap: 10px;
+}
+
+.proj-singleimg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

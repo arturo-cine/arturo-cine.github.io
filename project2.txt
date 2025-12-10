@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="project2.css" />
+    <link rel="stylesheet" href="style-common.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js"></script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+
+    <title>My AV Work</title>
+    <link rel="icon" type="image/x-icon" href="images/play-favicon.svg" />
+  </head>
+
+  <body>
+    <div class="wrapper">
+        <div class="header-wrapper" id="nav-left">
+          <div class="header">
+            <div class="nav" id="nav-left">
+                <div><p>Arturo NV</p></div>
+                <div><a href="/index.html"><p>Film</p></a></div>
+                <div><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><p>Photography</p></a></div>
+            </div>
+            <div class="nav" id="nav-right">
+              <div><a href="https://repo.library.stonybrook.edu/xmlui/bitstream/handle/11401/9656/rickroll.mp4?sequence=1&isAllowed=y"
+                target="_blank" download="rickrolled" ><p>CV</p></a></div>
+              <div><p>Instagram</p></div>
+              <div><p>+31 06 06 34267202</p></div>
+            <div><p>Email</p></div>
+        </div>
+          </div>
+        </div>
+        <div class="body-wrapper">
+            <div class="proj-title">
+                <p>This Time</p>
+            </div>
+            <div class="desc">
+                <p>
+                    Fiction short (25 min)<br>
+                    Graduation film<br>
+                    Ezra gets confronted by the death of his best friend when he is asked by their mother to recreate him in an AI. 
+                    While he trains the AI bot he goes through their shared memories but finds himself in between his guilt of what has happened and his responsibility as an AI trainer: 
+                    is it right to change someone in order to “save” them?
+                </p>
+            </div>
+            <div class="proj-image">
+                <img src="images/thistime.webp" />
+            </div>
+            <div class="desc">
+                <p>
+                    Ezra gets confronted by the death of his best friend when he is asked by their mother to recreate him in an AI. 
+                    While he trains the AI bot he goes through their shared memories but finds himself in between his guilt of what has happened and his responsibility as an AI trainer: 
+                    is it right to change someone in order to “save” them?
+                </p>
+            </div>
+            <iframe width="1521" height="560" src="https://www.youtube.com/embed/yNB84TY4Irs" title="&#39;This Time&#39; Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            
+            
+        </div>
+  </body>
+</html>
