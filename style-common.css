@@ -32,6 +32,8 @@ a {
 p {
   font-family: "Archivo";
   color: whitesmoke;
+  white-space: pre;
+  /* added with \n in json */
 }
 
 .wrapper {
