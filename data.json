@@ -6,12 +6,17 @@
     "cover": "thistime.webp",
     "banner": "thistime.webp",
     "title": "This Time",
+    "title_es": "",
     "category": "film",
     "year": "",
     "genre": "fiction short",
+    "genre_es": "",
     "length": "25 mins",
     "tags": ["Concept Development", "Directing", "Writing"],
+    "tags_es": [],
+    "hidden_tags": [],
     "desc": "text",
+    "desc_es": "",
     "img": [
       "thistime.webp",
       "thistime_l.jpg",
@@ -21,6 +26,7 @@
     "columnnr": 2,
     "video": [
       "youtube",
+      "16 / 9",
       "https://www.youtube.com/embed/yNB84TY4Irs?si=La2tIW9E_A_VxNtG"
     ]
   },

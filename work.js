@@ -83,4 +83,26 @@ function loadContent() {
     imgsdiv.innerHTML = code;
   }
   // put video
+  let videodiv = document.getElementById("projectvid");
+  if (projectData.video.length > 0 && projectData.video.length != undefined) {
+    let code = "";
+    if (
+      projectData.video[0] == "youtube" ||
+      projectData.video[0] == "Youtube"
+    ) {
+      code = `<iframe style="aspect-ratio: ${projectData.video[1]};" src=${projectData.video[2]} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+    } else if (
+      projectData.video[0] == "vimeo" ||
+      projectData.video[0] == "Vimeo"
+    ) {
+      code = `<iframe style="aspect-ratio: ${projectData.video[1]};" title="vimeo-player" src=${projectData.video[2]} frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"   allowfullscreen></iframe>`;
+    } else if (
+      projectData.video[0] == "drive" ||
+      projectData.video[0] == "Drive"
+    ) {
+      code = `<iframe style="aspect-ratio: ${projectData.video[1]};" src=${projectData.video[2]} title = "Google Drive video player"></iframe>`;
+    }
+
+    videodiv.innerHTML = code;
+  }
 }

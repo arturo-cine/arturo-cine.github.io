@@ -29,7 +29,11 @@ window.onload = () => {
         filterPhoto();
       } else if (window.location.search == "?film") {
         filterFilm();
-      } else if (window.location.pathname == "/index.html") {
+      } else if (
+        window.location.pathname == "/index.html" ||
+        window.location.pathname == "/" ||
+        window.location.pathname == ""
+      ) {
         filterAll();
       }
     });
