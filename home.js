@@ -50,7 +50,13 @@ function loadUrl() {
   for (let i = 0; i < alltags.length; i++) {
     if (alltags[i] !== "") {
       let tag = alltags[i].replace(/\s/g, "");
-      if (window.location.search == `?${tag.toLowerCase()}`) {
+      if (
+        window.location.search ==
+        `?${tag
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()}`
+      ) {
         filterByTag(alltags[i]);
       }
     }
@@ -62,6 +68,14 @@ function loadUrl() {
     filterFilm();
   } else if (window.location.search == "") {
     filterAll();
+  }
+
+  if (lang == "en") {
+    document.getElementById("film_menutag").innerHTML = "Film";
+    document.getElementById("photo_menutag").innerHTML = "Photography";
+  } else {
+    document.getElementById("film_menutag").innerHTML = "Cinematografía";
+    document.getElementById("photo_menutag").innerHTML = "Fotografía";
   }
 }
 
@@ -109,7 +123,14 @@ function filterByTag(tag) {
 
   loadProjects(filterData, tag);
   let url = tag.replace(/\s/g, "");
-  history.pushState([filterData, tag], "", `index.html?${url.toLowerCase()}`);
+  history.pushState(
+    [filterData, tag],
+    "",
+    `index.html?${url
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()}`
+  );
 }
 
 // PROJECT PAGE: loads html and fills it with data for homepage
@@ -156,4 +177,11 @@ function changeLang(language) {
   lang = language;
   localStorage.setItem("lang", language);
   loadUrl();
+  if (lang == "en") {
+    document.getElementById("film_menutag").innerHTML = "Film";
+    document.getElementById("photo_menutag").innerHTML = "Photography";
+  } else {
+    document.getElementById("film_menutag").innerHTML = "Cinematografía";
+    document.getElementById("photo_menutag").innerHTML = "Fotografía";
+  }
 }

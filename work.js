@@ -10,6 +10,14 @@ window.onload = () => {
       projectData = data.filter((project) => project.url == projecturl)[0];
       lang = localStorage.getItem("lang") || "es";
 
+      if (lang == "en") {
+        document.getElementById("film_menutag").innerHTML = "Film";
+        document.getElementById("photo_menutag").innerHTML = "Photography";
+      } else {
+        document.getElementById("film_menutag").innerHTML = "Cinematografía";
+        document.getElementById("photo_menutag").innerHTML = "Fotografía";
+      }
+
       loadContent(lang);
     });
 };
@@ -50,7 +58,11 @@ function loadContent(lang) {
       let code = "";
       projectData.tags.forEach((t) => {
         if (t !== "" && t !== " ") {
-          code = code + `<div class="proj-singletag">${t}</div>`;
+          code =
+            code +
+            `<div class="proj-singletag"><a href="/index.html?${t
+              .replace(/\s/g, "")
+              .toLowerCase()}">${t}</a></div>`;
         }
       });
       tagsdiv.innerHTML = code;
@@ -63,10 +75,30 @@ function loadContent(lang) {
       let code_es = "";
       projectData.tags_es.forEach((t) => {
         if (t !== "" && t !== " ") {
-          code_es = code_es + `<div class="proj-singletag">${t}</div>`;
+          code_es =
+            code_es +
+            `<div class="proj-singletag"><a href="/index.html?${t
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .replace(/\s/g, "")
+              .toLowerCase()}">${t}</a></div>`;
         }
       });
       tagsdiv.innerHTML = code_es;
+    } else {
+      if (projectData.tags.length > 0 && projectData.tags.length != undefined) {
+        let code = "";
+        projectData.tags.forEach((t) => {
+          if (t !== "" && t !== " ") {
+            code =
+              code +
+              `<div class="proj-singletag"><a href="/index.html?${t
+                .replace(/\s/g, "")
+                .toLowerCase()}">${t}</a></div>`;
+          }
+        });
+        tagsdiv.innerHTML = code;
+      }
     }
   }
 
@@ -75,13 +107,22 @@ function loadContent(lang) {
   if (lang == "en") {
     if (projectData.genre == "" || projectData.genre == " ") {
       genrediv.style.display = "none";
+    } else {
+      genrediv.style.display = "block";
+      genrediv.innerHTML = `<p>${projectData.genre}</p>`;
     }
-    genrediv.innerHTML = `<p>${projectData.genre}</p>`;
   } else {
     if (projectData.genre_es == "" || projectData.genre_es == " ") {
-      genrediv.style.display = "none";
+      if (projectData.genre == "" || projectData.genre == " ") {
+        genrediv.style.display = "none";
+      } else {
+        genrediv.style.display = "block";
+        genrediv.innerHTML = `<p>${projectData.genre}</p>`;
+      }
+    } else {
+      genrediv.style.display = "block";
+      genrediv.innerHTML = `<p>${projectData.genre_es}</p>`;
     }
-    genrediv.innerHTML = `<p>${projectData.genre_es}</p>`;
   }
 
   // put length
@@ -92,10 +133,26 @@ function loadContent(lang) {
   lengthdiv.innerHTML = `<p>${projectData.length}</p>`;
   // put description
   let descdiv = document.getElementById("projectdesc");
-  if (projectData.desc == "" || projectData.desc == " ") {
-    descdiv.style.display = "none";
+  if (lang == "en") {
+    if (projectData.desc == "" || projectData.desc == " ") {
+      descdiv.style.display = "none";
+    } else {
+      descdiv.style.display = "block";
+      descdiv.innerHTML = `<p>${projectData.desc}</p>`;
+    }
+  } else {
+    if (projectData.desc_es == "" || projectData.desc_es == " ") {
+      if (projectData.desc == "" || projectData.desc == " ") {
+        descdiv.style.display = "none";
+      } else {
+        descdiv.style.display = "block";
+        descdiv.innerHTML = `<p>${projectData.desc}</p>`;
+      }
+    } else {
+      descdiv.style.display = "block";
+      descdiv.innerHTML = `<p>${projectData.desc_es}</p>`;
+    }
   }
-  descdiv.innerHTML = `<p>${projectData.desc}</p>`;
   // put images
   let imgsdiv = document.getElementById("projectimgs");
   if (projectData.img.length > 0 && projectData.img.length != undefined) {
@@ -146,4 +203,12 @@ function changeLang(language) {
   lang = language;
   localStorage.setItem("lang", language);
   loadContent(language);
+
+  if (lang == "en") {
+    document.getElementById("film_menutag").innerHTML = "Film";
+    document.getElementById("photo_menutag").innerHTML = "Photography";
+  } else {
+    document.getElementById("film_menutag").innerHTML = "Cinematografía";
+    document.getElementById("photo_menutag").innerHTML = "Fotografía";
+  }
 }
