@@ -15,6 +15,10 @@ window.onload = () => {
         p.tags.forEach((t) => {
           alltags.push(t);
         });
+
+        p.tags_es.forEach((t) => {
+          alltags.push(t);
+        });
       });
 
       // check if filtered by tag
@@ -40,6 +44,9 @@ window.onload = () => {
 };
 
 function loadUrl() {
+  lang = localStorage.getItem("lang") || "es";
+  localStorage.setItem("lang", lang);
+
   for (let i = 0; i < alltags.length; i++) {
     if (alltags[i] !== "") {
       let tag = alltags[i].replace(/\s/g, "");
@@ -93,7 +100,9 @@ function filterPhoto() {
 }
 
 function filterByTag(tag) {
-  let filterData = projectsData.filter((project) => project.tags.includes(tag));
+  let filterData = projectsData.filter(
+    (project) => project.tags.includes(tag) || project.tags_es.includes(tag)
+  );
 
   // const categoryTitle = document.getElementById("categorytitle");
   // categoryTitle.innerHTML = `<p>${tag}</p>`;
@@ -124,7 +133,11 @@ function loadProjects(data, title) {
         </a>
 
      <div class="gallery-item-title">
-          <p>${project.title}</p>
+          <p>${
+            lang == "es" && project.title_es != ""
+              ? project.title_es
+              : project.title
+          }</p>
       </div>
      </div>
     `;

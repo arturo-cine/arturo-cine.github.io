@@ -1,17 +1,20 @@
 let projectData = [];
-
 let projecturl = window.location.search.slice(1);
+let lang;
 
-fetch("data.json")
-  .then((response) => response.json())
-  .then((data) => {
-    // filter for category
-    projectData = data.filter((project) => project.url == projecturl)[0];
+window.onload = () => {
+  fetch("data.json")
+    .then((response) => response.json())
+    .then((data) => {
+      // filter for category
+      projectData = data.filter((project) => project.url == projecturl)[0];
+      lang = localStorage.getItem("lang") || "es";
 
-    loadContent();
-  });
+      loadContent(lang);
+    });
+};
 
-function loadContent() {
+function loadContent(lang) {
   // put header img
   let headerdiv = document.getElementById("projectheader");
   if (projectData.banner == "" || projectData.banner == " ") {
@@ -21,10 +24,19 @@ function loadContent() {
   <img src="${projectData.folder + projectData.banner}" />`;
   // put title
   let titlediv = document.getElementById("projecttitle");
-  if (projectData.title == "" || projectData.title == " ") {
-    titlediv.style.display = "none";
+  if (lang == "en") {
+    if (projectData.title == "" || projectData.title == " ") {
+      titlediv.style.display = "none";
+    }
+    titlediv.innerHTML = `<p>${projectData.title}</p>`;
+  } else {
+    if (projectData.title_es != "" && projectData.title_es != undefined) {
+      titlediv.innerHTML = `<p>${projectData.title_es}</p>`;
+    } else {
+      titlediv.innerHTML = `<p>${projectData.title}</p>`;
+    }
   }
-  titlediv.innerHTML = `<p>${projectData.title}</p>`;
+
   // put year
   let yeardiv = document.getElementById("projectyear");
   if (projectData.year == "" || projectData.year == " ") {
@@ -33,22 +45,45 @@ function loadContent() {
   yeardiv.innerHTML = `<p>${projectData.year}</p>`;
   // put tags
   let tagsdiv = document.getElementById("projecttags");
-  if (projectData.tags.length > 0 && projectData.tags.length != undefined) {
-    let code = "";
-    projectData.tags.forEach((t) => {
-      if (t !== "" && t !== " ") {
-        code = code + `<div class="proj-singletag">${t}</div>`;
-      }
-    });
-    tagsdiv.innerHTML = code;
+  if (lang == "en") {
+    if (projectData.tags.length > 0 && projectData.tags.length != undefined) {
+      let code = "";
+      projectData.tags.forEach((t) => {
+        if (t !== "" && t !== " ") {
+          code = code + `<div class="proj-singletag">${t}</div>`;
+        }
+      });
+      tagsdiv.innerHTML = code;
+    }
+  } else {
+    if (
+      projectData.tags_es.length > 0 &&
+      projectData.tags_es.length != undefined
+    ) {
+      let code_es = "";
+      projectData.tags_es.forEach((t) => {
+        if (t !== "" && t !== " ") {
+          code_es = code_es + `<div class="proj-singletag">${t}</div>`;
+        }
+      });
+      tagsdiv.innerHTML = code_es;
+    }
   }
 
   // put genre (opt)
   let genrediv = document.getElementById("projectgenre");
-  if (projectData.genre == "" || projectData.genre == " ") {
-    genrediv.style.display = "none";
+  if (lang == "en") {
+    if (projectData.genre == "" || projectData.genre == " ") {
+      genrediv.style.display = "none";
+    }
+    genrediv.innerHTML = `<p>${projectData.genre}</p>`;
+  } else {
+    if (projectData.genre_es == "" || projectData.genre_es == " ") {
+      genrediv.style.display = "none";
+    }
+    genrediv.innerHTML = `<p>${projectData.genre_es}</p>`;
   }
-  genrediv.innerHTML = `<p>${projectData.genre}</p>`;
+
   // put length
   let lengthdiv = document.getElementById("projectlength");
   if (projectData.length == "" || projectData.length == " ") {
@@ -105,4 +140,10 @@ function loadContent() {
 
     videodiv.innerHTML = code;
   }
+}
+
+function changeLang(language) {
+  lang = language;
+  localStorage.setItem("lang", language);
+  loadContent(language);
 }
