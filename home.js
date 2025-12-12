@@ -1,7 +1,9 @@
 let projectsData = [];
 let alltags = [];
+let lang = "es";
 
 window.onload = () => {
+  lang = localStorage.getItem("lang") || "es";
   fetch("data.json")
     .then((response) => response.json())
     .then((data) => {
@@ -16,28 +18,45 @@ window.onload = () => {
       });
 
       // check if filtered by tag
-      for (let i = 0; i < alltags.length; i++) {
-        if (alltags[i] !== "") {
-          let tag = alltags[i].replace(/\s/g, "");
-          if (window.location.search == `?${tag.toLowerCase()}`) {
-            filterByTag(alltags[i]);
-          }
-        }
-      }
+      // for (let i = 0; i < alltags.length; i++) {
+      //   if (alltags[i] !== "") {
+      //     let tag = alltags[i].replace(/\s/g, "");
+      //     if (window.location.search == `?${tag.toLowerCase()}`) {
+      //       filterByTag(alltags[i]);
+      //     }
+      //   }
+      // }
 
-      if (window.location.search == "?photography") {
-        filterPhoto();
-      } else if (window.location.search == "?film") {
-        filterFilm();
-      } else if (
-        window.location.pathname == "/index.html" ||
-        window.location.pathname == "/" ||
-        window.location.pathname == ""
-      ) {
-        filterAll();
-      }
+      // if (window.location.search == "?photography") {
+      //   filterPhoto();
+      // } else if (window.location.search == "?film") {
+      //   filterFilm();
+      // } else if (window.location.search == "") {
+      //   filterAll();
+      // }
+
+      loadUrl();
     });
 };
+
+function loadUrl() {
+  for (let i = 0; i < alltags.length; i++) {
+    if (alltags[i] !== "") {
+      let tag = alltags[i].replace(/\s/g, "");
+      if (window.location.search == `?${tag.toLowerCase()}`) {
+        filterByTag(alltags[i]);
+      }
+    }
+  }
+
+  if (window.location.search == "?photography") {
+    filterPhoto();
+  } else if (window.location.search == "?film") {
+    filterFilm();
+  } else if (window.location.search == "") {
+    filterAll();
+  }
+}
 
 function filterAll() {
   loadProjects(projectsData, "");
@@ -53,8 +72,10 @@ function filterFilm() {
   // const categoryTitle = document.getElementById("categorytitle");
   // categoryTitle.innerHTML = "<p>Film Projects</p>";
 
-  loadProjects(filterData, "Film Projects");
-  history.pushState([filterData, "Film Projects"], "", "index.html?film");
+  let title = lang == "es" ? "Proyectos Cinematográficos" : "Film Projects";
+
+  loadProjects(filterData, title);
+  history.pushState([filterData, title], "", "index.html?film");
 }
 
 function filterPhoto() {
@@ -62,15 +83,13 @@ function filterPhoto() {
     (project) => project.category == "photo"
   );
 
+  let title = lang == "es" ? "Fotografía" : "Photography Projects";
+
   // const categoryTitle = document.getElementById("categorytitle");
   // categoryTitle.innerHTML = "<p>Photography Projects</p>";
 
-  loadProjects(filterData, "Photography Projects");
-  history.pushState(
-    [filterData, "Photography Projects"],
-    "",
-    "index.html?photography"
-  );
+  loadProjects(filterData, title);
+  history.pushState([filterData, title], "", "index.html?photography");
 }
 
 function filterByTag(tag) {
@@ -119,3 +138,9 @@ window.addEventListener("popstate", (event) => {
     loadProjects(event.state[0], event.state[1]);
   }
 });
+
+function changeLang(language) {
+  lang = language;
+  localStorage.setItem("lang", language);
+  loadUrl();
+}
