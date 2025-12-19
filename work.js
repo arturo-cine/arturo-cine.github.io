@@ -176,6 +176,7 @@ function loadContent(lang) {
 
     videodiv.innerHTML = code;
   }
+  new Lightbox();
 }
 
 function changeLang(language) {
