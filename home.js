@@ -1,46 +1,47 @@
 let projectsData = [];
 let alltags = [];
+let tagpairs = [];
 let lang = "es";
 
 window.onload = () => {
-  lang = localStorage.getItem("lang") || "es";
-  fetch("data.json")
-    .then((response) => response.json())
-    .then((data) => {
-      // filter for category
-      projectsData = data;
+  // fetch("data.json")
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  // filter for category
+  projectsData = data;
 
-      // make a list of all possible tags (p = project)
-      data.forEach((p) => {
-        p.tags.forEach((t) => {
-          alltags.push(t);
-        });
-
-        p.tags_es.forEach((t) => {
-          alltags.push(t);
-        });
-      });
-
-      // check if filtered by tag
-      // for (let i = 0; i < alltags.length; i++) {
-      //   if (alltags[i] !== "") {
-      //     let tag = alltags[i].replace(/\s/g, "");
-      //     if (window.location.search == `?${tag.toLowerCase()}`) {
-      //       filterByTag(alltags[i]);
-      //     }
-      //   }
-      // }
-
-      // if (window.location.search == "?photography") {
-      //   filterPhoto();
-      // } else if (window.location.search == "?film") {
-      //   filterFilm();
-      // } else if (window.location.search == "") {
-      //   filterAll();
-      // }
-
-      loadUrl();
+  // make a list of all possible tags (p = project)
+  data.forEach((p) => {
+    p.tags.forEach((pair) => {
+      pair.en != undefined && alltags.push(pair.en);
+      pair.es != undefined && alltags.push(pair.es);
+      tagpairs.push(pair);
     });
+    p.hidden_tags.forEach((t) => {
+      alltags.push(t);
+    });
+  });
+
+  // check if filtered by tag
+  // for (let i = 0; i < alltags.length; i++) {
+  //   if (alltags[i] !== "") {
+  //     let tag = alltags[i].replace(/\s/g, "");
+  //     if (window.location.search == `?${tag.toLowerCase()}`) {
+  //       filterByTag(alltags[i]);
+  //     }
+  //   }
+  // }
+
+  // if (window.location.search == "?photography") {
+  //   filterPhoto();
+  // } else if (window.location.search == "?film") {
+  //   filterFilm();
+  // } else if (window.location.search == "") {
+  //   filterAll();
+  // }
+
+  loadUrl();
+  //     });
 };
 
 function loadUrl() {
@@ -49,7 +50,9 @@ function loadUrl() {
 
   for (let i = 0; i < alltags.length; i++) {
     if (alltags[i] !== "") {
-      let tag = alltags[i].replace(/\s/g, "");
+      let tag = alltags[i]
+        .replace(/\s/g, "")
+        .replace(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g, "");
       if (
         window.location.search ==
         `?${tag
@@ -114,17 +117,27 @@ function filterPhoto() {
 }
 
 function filterByTag(tag) {
+  // let filterData = projectsData.filter(
+  //   (project) => project.tags.includes(tag) || project.tags_es.includes(tag)
+  // );
   let filterData = projectsData.filter(
-    (project) => project.tags.includes(tag) || project.tags_es.includes(tag)
+    (project) =>
+      project.tags.some((tags) => tags.en == tag || tags.es == tag) ||
+      project.hidden_tags.includes(tag)
   );
+  let titlepair = tagpairs.find((tags) => tags.en == tag || tags.es == tag);
+  let title =
+    titlepair == undefined ? tag : lang == "es" ? titlepair.es : titlepair.en;
 
   // const categoryTitle = document.getElementById("categorytitle");
   // categoryTitle.innerHTML = `<p>${tag}</p>`;
 
-  loadProjects(filterData, tag);
-  let url = tag.replace(/\s/g, "");
+  loadProjects(filterData, title);
+  let url = tag
+    .replace(/\s/g, "")
+    .replace(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g, "");
   history.pushState(
-    [filterData, tag],
+    [filterData, title],
     "",
     `index.html?${url
       .normalize("NFD")

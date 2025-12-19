@@ -3,26 +3,27 @@ let projecturl = window.location.search.slice(1);
 let lang;
 
 window.onload = () => {
-  fetch("data.json")
-    .then((response) => response.json())
-    .then((data) => {
-      // filter for category
-      projectData = data.filter((project) => project.url == projecturl)[0];
-      lang = localStorage.getItem("lang") || "es";
+  // fetch("data.json")
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  // filter for category
+  projectData = data.filter((project) => project.url == projecturl)[0];
+  lang = localStorage.getItem("lang") || "es";
 
-      if (lang == "en") {
-        document.getElementById("film_menutag").innerHTML = "Film";
-        document.getElementById("photo_menutag").innerHTML = "Photography";
-      } else {
-        document.getElementById("film_menutag").innerHTML = "Cinematografía";
-        document.getElementById("photo_menutag").innerHTML = "Fotografía";
-      }
+  if (lang == "en") {
+    document.getElementById("film_menutag").innerHTML = "Film";
+    document.getElementById("photo_menutag").innerHTML = "Photography";
+  } else {
+    document.getElementById("film_menutag").innerHTML = "Cinematografía";
+    document.getElementById("photo_menutag").innerHTML = "Fotografía";
+  }
 
-      loadContent(lang);
-    });
+  loadContent(lang);
+  // });
 };
 
 function loadContent(lang) {
+  //
   // put header img
   let headerdiv = document.getElementById("projectheader");
   if (projectData.banner == "" || projectData.banner == " ") {
@@ -30,6 +31,7 @@ function loadContent(lang) {
   }
   headerdiv.innerHTML = `
   <img src="${projectData.folder + projectData.banner}" />`;
+  //
   // put title
   let titlediv = document.getElementById("projecttitle");
   if (lang == "en") {
@@ -44,62 +46,39 @@ function loadContent(lang) {
       titlediv.innerHTML = `<p>${projectData.title}</p>`;
     }
   }
-
+  //
   // put year
   let yeardiv = document.getElementById("projectyear");
   if (projectData.year == "" || projectData.year == " ") {
     yeardiv.style.display = "none";
   }
   yeardiv.innerHTML = `<p>${projectData.year}</p>`;
+  //
   // put tags
   let tagsdiv = document.getElementById("projecttags");
-  if (lang == "en") {
-    if (projectData.tags.length > 0 && projectData.tags.length != undefined) {
-      let code = "";
-      projectData.tags.forEach((t) => {
-        if (t !== "" && t !== " ") {
+
+  if (projectData.tags.length > 0 && projectData.tags.length != undefined) {
+    let code = "";
+    projectData.tags.forEach((pair) => {
+      if (lang == "en") {
+        if (pair.en !== "" && pair.en !== " ") {
           code =
             code +
-            `<div class="proj-singletag"><a href="/index.html?${t
+            `<div class="proj-singletag"><a href="/index.html?${pair.en
               .replace(/\s/g, "")
-              .toLowerCase()}">${t}</a></div>`;
+              .toLowerCase()}">${pair.en}</a></div>`;
         }
-      });
-      tagsdiv.innerHTML = code;
-    }
-  } else {
-    if (
-      projectData.tags_es.length > 0 &&
-      projectData.tags_es.length != undefined
-    ) {
-      let code_es = "";
-      projectData.tags_es.forEach((t) => {
-        if (t !== "" && t !== " ") {
-          code_es =
-            code_es +
-            `<div class="proj-singletag"><a href="/index.html?${t
-              .normalize("NFD")
-              .replace(/[\u0300-\u036f]/g, "")
+      } else {
+        if (pair.es !== "" && pair.es !== " ") {
+          code =
+            code +
+            `<div class="proj-singletag"><a href="/index.html?${pair.es
               .replace(/\s/g, "")
-              .toLowerCase()}">${t}</a></div>`;
+              .toLowerCase()}">${pair.es}</a></div>`;
         }
-      });
-      tagsdiv.innerHTML = code_es;
-    } else {
-      if (projectData.tags.length > 0 && projectData.tags.length != undefined) {
-        let code = "";
-        projectData.tags.forEach((t) => {
-          if (t !== "" && t !== " ") {
-            code =
-              code +
-              `<div class="proj-singletag"><a href="/index.html?${t
-                .replace(/\s/g, "")
-                .toLowerCase()}">${t}</a></div>`;
-          }
-        });
-        tagsdiv.innerHTML = code;
       }
-    }
+    });
+    tagsdiv.innerHTML = code;
   }
 
   // put genre (opt)
