@@ -1,21 +1,36 @@
+@font-face {
+  font-family: "Archivo", sans-serif;
+  src: url("/fonts/Archivo-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Author", sans-serif;
+  font-weight: 900;
+  src: url("/fonts/Author-Bold.otf");
+}
+
+@font-face {
+  font-family: "Author", serif;
+  font-weight: normal;
+  src: url("/fonts/Author-Regular.otf");
+}
+
+@font-face {
+  font-family: "Author Variable", serif;
+  /* font-weight: normal; */
+  src: url("/fonts/Author-Variable.ttf");
+}
+
 .proj-title {
   background-color: black;
   color: whitesmoke;
   margin: 1.5rem;
-  font-weight: lighter;
-  font-size: 3.6rem;
+  /* font-weight: lighter; */
+  font-family: "Author Variable";
+  font-weight: 900;
+  font-size: 4rem;
   justify-items: center;
   text-align: center;
-}
-
-.desc {
-  color: whitesmoke;
-  margin-top: 5rem;
-  margin-left: 20rem;
-  margin-right: 20rem;
-  margin-bottom: 5rem;
-  font-weight: normal;
-  font-size: 1rem;
 }
 
 .proj-header {
@@ -29,18 +44,72 @@
   object-position: center;
 }
 
+.proj-tags {
+  display: flex;
+  /* background-color: brown; */
+  margin-left: 20rem;
+  margin-right: 20rem;
+  margin-bottom: 2rem;
+  gap: 10px;
+}
+
 .proj-singletag {
   color: white;
+  /* background-color: brown; */
+  border: inset 1.5px white;
+  border-style: solid;
+  width: fit-content;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 40px;
   /* height: 30px; */
+}
+
+.proj-year {
+  color: white;
+  /* background-color: teal; */
+  margin-left: 24rem;
+  margin-right: 24rem;
+}
+
+.proj-genre {
+  color: white;
+  /* background-color: blue; */
+  margin-left: 24rem;
+  margin-right: 24rem;
+}
+
+.proj-length {
+  color: white;
+  /* background-color: purple; */
+  margin-left: 24rem;
+  margin-right: 24rem;
+}
+
+.desc {
+  color: whitesmoke;
+  margin-top: 2rem;
+  margin-left: 20rem;
+  margin-right: 20rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  /* font-family: "Author"; */
 }
 
 .proj-imgs {
   display: grid;
-  width: 100%;
-  gap: 10px;
+  width: 89%;
+  gap: 20px;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .proj-singleimg {
+  cursor: pointer;
   aspect-ratio: 1 / 1;
 }
 
@@ -51,7 +120,12 @@
 }
 
 .proj-vid {
+  position: relative;
   width: 70vw;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  padding-bottom: 5%;
 }
 
 .proj-vid iframe {
@@ -60,7 +134,7 @@
 }
 
 #gallery-lightbox {
-  background: orange;
+  background: rgba(0, 0, 0, 0.85);
   position: absolute;
   z-index: 100;
   top: 0;
@@ -77,24 +151,52 @@
 }
 
 #gallery-left {
+  /* background: cadetblue; */
+  height: 80%;
+  width: 5vw;
   position: absolute;
-  top: 50%;
+  top: 20%;
   left: 10px;
+  cursor: pointer;
 }
+
+#gallery-left span {
+  /* background: cyan; */
+  position: relative;
+  top: 40%;
+  color: white;
+}
+
 #gallery-right {
+  /* background: palevioletred; */
+  height: 80%;
+  width: 5vw;
   position: absolute;
-  top: 50%;
+  top: 20%;
   right: 10px;
+  cursor: pointer;
 }
+
+#gallery-right span {
+  /* background: pink; */
+  position: relative;
+  top: 40%;
+  float: right;
+  color: white;
+}
+
 #gallery-close {
   position: absolute;
   top: 10px;
   right: 10px;
+  color: white;
+  cursor: pointer;
 }
 #gallery-item {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;
+  width: 80%;
+  max-height: 80%;
 }

@@ -18,19 +18,23 @@
   flex-wrap: wrap;
   justify-content: center;
   /* background-color: navy; */
+  /* width: 89%; */
+  gap: 20px;
+  /* padding-left: 5%; */
+  /* padding-right: 5%; */
 }
 
 .gallery-item {
   margin: 0;
   padding: 0;
-  width: 30%;
+  width: 31%;
   height: auto;
   box-sizing: border-box;
   overflow: hidden;
   display: block;
   position: relative;
   /* background-color: purple; */
-  margin: 1%;
+  /* margin: 1%; */
 }
 
 .gallery-item:hover {
@@ -51,6 +55,7 @@
   height: auto;
   display: inline-flex;
   position: relative;
+  margin-top: 12px;
   font-style: normal;
   font-weight: bold;
   /* text-transform: uppercase; */

@@ -17,6 +17,8 @@
 
     <title>My AV Work</title>
     <link rel="icon" type="image/x-icon" href="images/play-favicon.svg" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_back_ios,arrow_forward_ios,close" />
+    <!-- Note: Google Material Symbols must be in alphabetical order or they won't display -->
   </head>
 
   <body>
@@ -47,17 +49,29 @@
         <div class="body-wrapper">
             <div class="proj-header" id="projectheader"></div>
             <div class="proj-title" id="projecttitle"></div>
-            <div class="proj-year" id="projectyear"></div>
             <div class="proj-tags" id="projecttags"></div>
+            <div class="proj-year" id="projectyear"></div>
             <div class="proj-genre" id="projectgenre"></div>
             <div class="proj-length" id="projectlength"></div>
             <div class="desc" id="projectdesc"></div>
             <div class="proj-imgs" id="projectimgs"></div>
             <div class="proj-vid" id="projectvid"></div>
             <div id="gallery-lightbox">
-              <div id="gallery-left"><</div>  
-              <div id="gallery-right">></div>
-              <div id="gallery-close">x</div>
+              <div id="gallery-left">
+                <span class="material-symbols-outlined">
+                  arrow_back_ios
+                </span>
+              </div>  
+              <div id="gallery-right">
+                <span class="material-symbols-outlined">
+                  arrow_forward_ios
+                </span>
+              </div>
+              <div id="gallery-close">
+                <span class="material-symbols-outlined">
+                  close
+                </span>
+              </div>
               <img id="gallery-item"/>  
             </div>
         </div>
