@@ -103,7 +103,7 @@ p {
   /* font-family: "Archivo"; */
   font-family: "Satoshi Variable";
   /* font-family: "Fira Sans"; */
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-style: normal;
   font-weight: normal;
   color: whitesmoke;
@@ -161,6 +161,9 @@ p {
 }
 
 @media screen and (max-width: 1200px) {
+  .header {
+    font-size: 1rem;
+  }
 }
 
 @media screen and (max-width: 700px) {

@@ -59,6 +59,7 @@
   display: inline-flex;
   position: relative;
   margin-top: 12px;
+  margin-bottom: 12px;
   font-style: normal;
   font-weight: bold;
   /* text-transform: uppercase; */
